@@ -575,10 +575,10 @@ sup > a::before,
 }
 #nprogress .bar {
   height: 3px !important;
-  background-color: #000000 !important;
+  background-color: #fff !important;
 }
 #nprogress .peg {
-  box-shadow: 0 0 14px #000000, 0 0 8px #000000 !important;
+  box-shadow: 0 0 14px #fff, 0 0 8px #fff !important;
 }
 @media (max-width: 575px) {
   #nprogress .bar {
