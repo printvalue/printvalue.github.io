@@ -15,23 +15,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#2f4154">
+  <meta name="theme-color" content="#000000">
   <meta name="author" content="卷纸要用清风的">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在C#中，System.Threading.Channels 提供了高效的异步生产-消费模型，适用于多任务间的数据传递。以下是其核心概念及使用方法的总结： 核心概念Channel&lt;T&gt;：异步消息队列，支持多生产者和多消费者。 ChannelWriter&lt;T&gt;：用于异步写入数据（WriteAsync），完成后需调用 Complete()。 ChannelReader&lt;T">
+    <meta name="description" content="&#x2F;* 仅对本页面的代码块生效 *&#x2F; .markdown-body figure.highlight .code pre code, .markdown-body .highlight pre code, .markdown-body pre code {   font-family: &quot;JetBrains Mono&quot;;   font-size: 14px;   font-variant-liga">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C Sharp Channel">
 <meta property="og:url" content="http://example.com/2025/03/10/C-Sharp-Channel/index.html">
 <meta property="og:site_name" content="卷纸要用清风的">
-<meta property="og:description" content="在C#中，System.Threading.Channels 提供了高效的异步生产-消费模型，适用于多任务间的数据传递。以下是其核心概念及使用方法的总结： 核心概念Channel&lt;T&gt;：异步消息队列，支持多生产者和多消费者。 ChannelWriter&lt;T&gt;：用于异步写入数据（WriteAsync），完成后需调用 Complete()。 ChannelReader&lt;T">
+<meta property="og:description" content="&#x2F;* 仅对本页面的代码块生效 *&#x2F; .markdown-body figure.highlight .code pre code, .markdown-body .highlight pre code, .markdown-body pre code {   font-family: &quot;JetBrains Mono&quot;;   font-size: 14px;   font-variant-liga">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-10T03:12:01.000Z">
-<meta property="article:modified_time" content="2025-12-20T12:30:09.271Z">
+<meta property="article:modified_time" content="2025-12-31T02:26:02.309Z">
 <meta property="article:author" content="卷纸要用清风的">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary_large_image">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>C Sharp Channel - 卷纸要用清风的</title>
@@ -72,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"csharp"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"7e0dfda99ca4b61f40b18dbf4cd60e37","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -83,6 +85,19 @@
   <script  src="/js/color-schema.js" ></script>
   
 
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?7e0dfda99ca4b61f40b18dbf4cd60e37";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
   
 
   
@@ -234,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          945 字
+          975 字
         
       </span>
     
@@ -245,12 +260,21 @@
         
         
         
-          8 分钟
+          9 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
     
   </div>
 
@@ -287,7 +311,19 @@
             
               <div class="markdown-body">
                 
-                <p>在<code>C#</code>中，<code>System.Threading.Channels</code> 提供了<em><strong>高效的异步生产-消费模型</strong></em>，适用于多任务间的数据传递。以下是其核心概念及使用方法的总结：</p>
+                <style>
+/* 仅对本页面的代码块生效 */
+.markdown-body figure.highlight .code pre code,
+.markdown-body .highlight pre code,
+.markdown-body pre code {
+  font-family: "JetBrains Mono";
+  font-size: 14px;
+  font-variant-ligatures: contextual;
+}
+</style>
+
+
+<p>在<code>C#</code>中，<code>System.Threading.Channels</code> 提供了<em><strong>高效的异步生产-消费模型</strong></em>，适用于多任务间的数据传递。以下是其核心概念及使用方法的总结：</p>
 <h1 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h1><p><code>Channel&lt;T&gt;</code>：异步消息队列，支持多生产者和多消费者。</p>
 <p><code>ChannelWriter&lt;T&gt;</code>：用于异步写入数据（<code>WriteAsync</code>），完成后需调用 <code>Complete()</code>。</p>
 <p><code>ChannelReader&lt;T&gt;</code>：用于异步读取数据，支持 <code>ReadAsync</code> 或 <code>ReadAllAsync</code> 遍历。</p>
@@ -393,6 +429,11 @@
           <div>2025年3月10日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年12月31日</div>
+        </div>
       
       
         <div class="license-meta-item">
@@ -535,6 +576,32 @@
   <footer>
     <div class="footer-inner">
   
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        访问 
+        <span id="busuanzi_value_site_pv"></span>
+         
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        访客 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
   
   
 </div>
@@ -680,6 +747,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
