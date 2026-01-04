@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Hexo 一些小问题</title>
+    <link href="/2026/01/04/Hexo-%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
+    <url>/2026/01/04/Hexo-%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<style>/* 仅对本页面的代码块生效 */.markdown-body figure.highlight .code pre code,.markdown-body .highlight pre code,.markdown-body pre code {  font-family: "JetBrains Mono";  font-size: 14px;  font-variant-ligatures: contextual;}</style><h1 id="解决使用Hexo命令无法识别的问题"><a href="#解决使用Hexo命令无法识别的问题" class="headerlink" title="解决使用Hexo命令无法识别的问题"></a>解决使用Hexo命令无法识别的问题</h1><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 1. 删除 node_modules 和 package-lock.json</span><br><span class="hljs-built_in">Remove-Item</span> <span class="hljs-literal">-Recurse</span> <span class="hljs-literal">-Force</span> node_modules<br><span class="hljs-built_in">Remove-Item</span> package<span class="hljs-literal">-lock</span>.json<br><br><span class="hljs-comment"># 2. 重新安装依赖</span><br><br>npm install<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>C Sharp required</title>
     <link href="/2025/11/13/C-Sharp-required/"/>
     <url>/2025/11/13/C-Sharp-required/</url>
