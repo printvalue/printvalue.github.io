@@ -1,0 +1,885 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/head.png">
+  <link rel="icon" href="/img/head.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#000000">
+  <meta name="author" content="卷纸要用清风的">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="&#x2F;* 仅对本页面的代码块生效 *&#x2F; .markdown-body figure.highlight .code pre code, .markdown-body .highlight pre code, .markdown-body pre code {   font-family: &quot;JetBrains Mono&quot;;   font-size: 14px;   font-variant-liga">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C Sharp AppContext.BaseDirectory 应用程序的启动目录">
+<meta property="og:url" content="http://example.com/2025/04/22/C-Sharp/C-Sharp-AppContext-BaseDirectory-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%90%AF%E5%8A%A8%E7%9B%AE%E5%BD%95/index.html">
+<meta property="og:site_name" content="卷纸要用清风的">
+<meta property="og:description" content="&#x2F;* 仅对本页面的代码块生效 *&#x2F; .markdown-body figure.highlight .code pre code, .markdown-body .highlight pre code, .markdown-body pre code {   font-family: &quot;JetBrains Mono&quot;;   font-size: 14px;   font-variant-liga">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-22T07:04:46.000Z">
+<meta property="article:modified_time" content="2025-12-31T02:25:05.680Z">
+<meta property="article:author" content="卷纸要用清风的">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>C Sharp AppContext.BaseDirectory 应用程序的启动目录 - 卷纸要用清风的</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#fff","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"csharp"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"7e0dfda99ca4b61f40b18dbf4cd60e37","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?7e0dfda99ca4b61f40b18dbf4cd60e37";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>卷纸要用清风的</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="C Sharp AppContext.BaseDirectory 应用程序的启动目录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-22 15:04" pubdate>
+          2025年4月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">C Sharp AppContext.BaseDirectory 应用程序的启动目录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <style>
+/* 仅对本页面的代码块生效 */
+.markdown-body figure.highlight .code pre code,
+.markdown-body .highlight pre code,
+.markdown-body pre code {
+  font-family: "JetBrains Mono";
+  font-size: 14px;
+  font-variant-ligatures: contextual;
+}
+</style>
+
+<blockquote>
+<p>注意AppContext.BaseDirectory结尾带  \</p>
+</blockquote>
+<blockquote>
+<p>可用AppContext.BaseDirectory.TrimEnd(System.IO.Path.DirectorySeparatorChar)去除</p>
+</blockquote>
+<hr>
+<p>在<code>C# WinForms</code>应用中，<code>Application.StartupPath</code>、<code>Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)</code> 和 <code>Directory.GetCurrentDirectory()</code> 是三种获取路径的常用方法，但它们在行为、用途和局限性上有显著差异。以下是详细的对比分析：</p>
+<h1 id="Application-StartupPath"><a href="#Application-StartupPath" class="headerlink" title="Application.StartupPath"></a><code>Application.StartupPath</code></h1><h2 id="定义与用途"><a href="#定义与用途" class="headerlink" title="定义与用途"></a>定义与用途</h2><ul>
+<li><p>命名空间: <code>System.Windows.Forms</code></p>
+</li>
+<li><p>返回值: 应用程序启动时的可执行文件（<code>.exe</code>）所在目录的绝对路径。</p>
+</li>
+<li><p>典型场景: 获取应用程序的安装目录（如配置文件、资源文件的路径）。</p>
+</li>
+</ul>
+<h2 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h2><ul>
+<li><p>仅限<code>WinForms</code>应用: 依赖<code>System.Windows.Forms</code>，不适用于非<code>WinForms</code>项目（如控制台应用、<code>ASP.NET</code>）。</p>
+</li>
+<li><p><code>ClickOnce</code>部署问题: 若应用通过<code>ClickOnce</code>发布，返回的是临时缓存路径（如<code>AppData\Local\Apps\...</code>），而非原始安装路径。</p>
+</li>
+<li><p>快捷方式影响: 即使通过快捷方式启动且修改了“工作目录”，此属性仍返回<code>.exe</code>所在目录，不受工作目录影响。</p>
+</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-built_in">string</span> startupPath = Application.StartupPath; <br><span class="hljs-comment">// 例如：C:\MyApp\bin\Debug</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="Path-GetDirectoryName-Assembly-GetExecutingAssembly-Location"><a href="#Path-GetDirectoryName-Assembly-GetExecutingAssembly-Location" class="headerlink" title="Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)"></a><code>Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)</code></h1><h2 id="定义与用途-1"><a href="#定义与用途-1" class="headerlink" title="定义与用途"></a>定义与用途</h2><ul>
+<li><p>命名空间: <code>System.Reflection</code>（<code>Assembly</code>类）、<code>System.IO</code>（<code>Path</code>类）</p>
+</li>
+<li><p>返回值: 当前执行程序集（<code>.exe</code>或<code>.dll</code>）的物理路径的目录部分。</p>
+</li>
+<li><p>典型场景: <em><strong>精确获取程序集的真实路径（无论是否被重定向或缓存）</strong></em>。</p>
+</li>
+</ul>
+<h2 id="局限性-1"><a href="#局限性-1" class="headerlink" title="局限性"></a>局限性</h2><ul>
+<li><p><code>Shadow Copy</code>影响: 在<code>ASP.NET</code>或插件系统中，程序集可能被“影子复制”到临时目录，此时<code>Location</code>返回的是临时路径。</p>
+</li>
+<li><p>网络加载问题: 若程序集从网络或字节流加载，<code>Location</code>可能不可用或返回空值。</p>
+</li>
+<li><p>权限要求: 需要文件系统访问权限，某些沙盒环境可能受限。</p>
+</li>
+</ul>
+<h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-built_in">string</span> assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);<br><span class="hljs-comment">// 例如：C:\MyApp\bin\Debug</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="Directory-GetCurrentDirectory"><a href="#Directory-GetCurrentDirectory" class="headerlink" title="Directory.GetCurrentDirectory()"></a>Directory.GetCurrentDirectory()</h1><h2 id="定义与用途-2"><a href="#定义与用途-2" class="headerlink" title="定义与用途"></a>定义与用途</h2><ul>
+<li><p>命名空间: <code>System.IO</code></p>
+</li>
+<li><p>返回值: 进程的当前工作目录（可通过<code>Environment.CurrentDirectory</code>修改）。</p>
+</li>
+<li><p>典型场景: 获取&#x2F;设置应用程序运行时的上下文目录（如读取用户选择的文件）。</p>
+</li>
+</ul>
+<h2 id="局限性-2"><a href="#局限性-2" class="headerlink" title="局限性"></a>局限性</h2><ul>
+<li><p>易变性: 当前目录可能被代码（<code>Environment.CurrentDirectory</code>）或外部进程（如通过快捷方式启动时设置的“起始位置”）改变。</p>
+</li>
+<li><p>不可靠性: 多线程环境中，若某线程修改了当前目录，会影响所有线程的结果。</p>
+</li>
+<li><p>部署无关性: 与应用程序安装路径无关，仅反映运行时的工作目录。</p>
+</li>
+</ul>
+<h2 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-built_in">string</span> currentDir = Directory.GetCurrentDirectory();<br><span class="hljs-comment">// 可能为 C:\MyApp\bin\Debug（默认），或通过代码/启动方式修改后的路径。</span><br></code></pre></td></tr></table></figure>
+<hr>
+<h1 id="关键区别总结"><a href="#关键区别总结" class="headerlink" title="关键区别总结"></a>关键区别总结</h1><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Application.StartupPath</th>
+<th>Assembly.Location</th>
+<th>Directory.GetCurrentDirectory()</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据源</strong></td>
+<td>应用程序启动路径</td>
+<td>程序集物理路径</td>
+<td>进程当前工作目录</td>
+</tr>
+<tr>
+<td><strong>部署敏感</strong></td>
+<td>受ClickOnce影响</td>
+<td>受Shadow Copy&#x2F;网络加载影响</td>
+<td>与部署无关</td>
+</tr>
+<tr>
+<td><strong>可变性</strong></td>
+<td>固定（启动后不变）</td>
+<td>固定（程序集路径不变）</td>
+<td>动态（可被代码或外部修改）</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>WinForms安装目录</td>
+<td>精确获取程序集路径</td>
+<td>运行时工作目录</td>
+</tr>
+<tr>
+<td><strong>跨平台兼容性</strong></td>
+<td>仅Windows&#x2F;WinForms</td>
+<td>全平台（.NET Core&#x2F;5+）</td>
+<td>全平台</td>
+</tr>
+</tbody></table>
+<h1 id="推荐使用场景"><a href="#推荐使用场景" class="headerlink" title="推荐使用场景"></a>推荐使用场景</h1><h3 id="需要应用程序安装目录"><a href="#需要应用程序安装目录" class="headerlink" title="需要应用程序安装目录"></a>需要应用程序安装目录</h3><p>优先使用 <code>Assembly.GetExecutingAssembly().Location</code>（跨平台兼容）。</p>
+<p><code>WinForms</code>专用场景可用 <code>Application.StartupPath</code>，但需注意<code>ClickOnce</code>问题。</p>
+<h3 id="需要动态工作目录"><a href="#需要动态工作目录" class="headerlink" title="需要动态工作目录"></a>需要动态工作目录</h3><p>使用 Directory.GetCurrentDirectory()，但需明确其可变性，避免依赖它存储关键路径。</p>
+<h3 id="插件或模块化应用"><a href="#插件或模块化应用" class="headerlink" title="插件或模块化应用"></a>插件或模块化应用</h3><p>对加载的插件程序集使用 Assembly.Location，注意处理Shadow Copy场景。</p>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><blockquote>
+<p>Q: ClickOnce部署时如何获取真实安装路径？</p>
+</blockquote>
+<blockquote>
+<p>A:<br>使用ApplicationDeployment.CurrentDeployment.ActivationUri（需检查部署状态），但需处理非ClickOnce场景的回退逻辑。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Q: 如何安全地组合路径？</p>
+</blockquote>
+<blockquote>
+<p>A: 始终使用Path.Combine()而非字符串拼接，避免跨平台路径分隔符问题：</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-built_in">string</span> configPath = Path.Combine(<br>    Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),<br>    <span class="hljs-string">&quot;Config&quot;</span>,<br>    <span class="hljs-string">&quot;appsettings.json&quot;</span><br>);<br></code></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>Q: 在ASP.NET Core中如何替代？</p>
+</blockquote>
+<blockquote>
+<p>A: 使用IWebHostEnvironment.ContentRootPath或AppContext.BaseDirectory替代。</p>
+</blockquote>
+<hr>
+<p>通过理解这些方法的差异和局限性，可以避免路径相关的常见陷阱（如文件未找到、权限错误），确保应用在不同环境中稳定运行。</p>
+<h1 id="很快啊-又发现个新的"><a href="#很快啊-又发现个新的" class="headerlink" title="很快啊 又发现个新的"></a>很快啊 又发现个新的</h1><h2 id="AppContext-BaseDirectory"><a href="#AppContext-BaseDirectory" class="headerlink" title="AppContext.BaseDirectory"></a><code>AppContext.BaseDirectory</code></h2><h3 id="功能定义"><a href="#功能定义" class="headerlink" title="功能定义"></a>功能定义</h3><p> <code>AppContext.BaseDirectory</code></p>
+<ul>
+<li>功能：获取程序集解析程序用于探测程序集的基目录的文件路径。</li>
+<li>特点：返回的是应用程序的根目录，通常对应于应用程序的启动目录。</li>
+<li>跨平台性：在 <code>.NET Core</code> 和 <code>.NET 5+</code> 中，它是一个跨平台的首选方式，适用于各种操作系统。</li>
+</ul>
+<p><code>System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)</code></p>
+<ul>
+<li>功能：获取当前正在执行的程序集所在的目录。</li>
+<li>特点：返回的是当前程序集的物理路径所在的目录。</li>
+<li>跨平台性：虽然也是跨平台的，但它的行为可能因程序集的部署方式（如影子复制、嵌入式资源等）而有所不同。</li>
+</ul>
+<h3 id="返回值的区别"><a href="#返回值的区别" class="headerlink" title="返回值的区别"></a>返回值的区别</h3><p><code>AppContext.BaseDirectory</code></p>
+<ul>
+<li>返回的是应用程序的启动目录，即应用程序启动时所在的目录。<br>例如，如果应用程序是从某个可执行文件启动的，那么返回的就是该可执行文件所在的目录。</li>
+</ul>
+<p><code>System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)</code></p>
+<ul>
+<li>返回的是当前正在执行的程序集所在的目录。<br>如果程序集被影子复制（Shadow Copying），则返回的是影子复制后的目录，而不是原始程序集所在的目录。<br>如果程序集是嵌入式资源（如在某些打包工具中），则可能返回的是临时解压后的目录。</li>
+</ul>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p><code>AppContext.BaseDirectory</code></p>
+<ul>
+<li>适用场景：当需要获取应用程序的根目录时，尤其是当应用程序的启动目录和程序集所在的目录一致时。</li>
+<li>优点：更稳定，不受程序集部署方式的影响，是跨平台的首选方式。</li>
+<li>示例：在 <code>ASP.NET Core</code> 应用程序中，<code>AppContext.BaseDirectory</code> 可以用来获取应用程序的根目录，用于加载配置文件、日志文件等。</li>
+<li></li>
+</ul>
+<p><code>System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)</code></p>
+<ul>
+<li>适用场景：当需要获取当前程序集的具体路径时，尤其是在程序集可能被影子复制或嵌入式部署的场景中。</li>
+<li>优点：可以精确地获取当前程序集的实际路径。</li>
+<li>缺点：在某些情况下（如影子复制），返回的路径可能不是原始路径，需要额外处理。</li>
+<li>示例：在某些需要动态加载程序集的场景中，可能需要使用 <code>Assembly.GetExecutingAssembly().Location</code> 来获取程序集的实际路径。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/C/" class="category-chain-item">C#</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/" class="print-no-link">#C#</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>C Sharp AppContext.BaseDirectory 应用程序的启动目录</div>
+      <div>http://example.com/2025/04/22/C-Sharp/C-Sharp-AppContext-BaseDirectory-应用程序的启动目录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>卷纸要用清风的</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月22日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年12月31日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/18/C-Sharp/C-Sharp-String-%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E%E7%AC%A6/" title="C Sharp String 格式说明符">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C Sharp String 格式说明符</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/24/C-Sharp/C-Sharp-CancellationTokenSource-CancellationToken-Task-Run%E4%BC%A0%E5%85%A5token-%E5%8F%96%E6%B6%88%E4%BB%A4%E7%89%8C/" title="C Sharp CancellationTokenSource CancellationToken Task.Run传入token 取消令牌">
+                        <span class="hidden-mobile">C Sharp CancellationTokenSource CancellationToken Task.Run传入token 取消令牌</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        访问 
+        <span id="busuanzi_value_site_pv"></span>
+         
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        访客 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
